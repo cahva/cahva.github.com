@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>TMMS - Sähköpostitilin hallinta</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid content">
+    
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Postihallinta</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li class="active"><a href="tmms_user_domains.html">Verkkotunnukset</a></li>
+            <li><a href="tmms_user_mailboxes.html">Postilaatikot</a></li>
+            <li><a href="tmms_user_aliases">Aliakset</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">WMHost (wmhost01) <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Kirjaudu ulos</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+      
+    <!-- Main Content -->
+    <h1>Verkkotunnukset</h1>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Verkkotunnus</th>
+          <th>Tilejä käytössä</th>
+          <th>Tilankäyttö</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>wmhost.com</td>
+          <td>41 / 50</td>
+          <td>
+            <p>
+              62GB / 100GB
+            </p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%;">
+                62%
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="danger">
+          <td>devnet.fi</td>
+          <td>62 / 100</td>
+          <td>
+            <p>
+              16,6GB / 18GB
+            </p>
+            <div class="progress">
+
+              <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
+                95%
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- /Main Content -->
+  </div> <!-- /container -->
+</body>
+</html>

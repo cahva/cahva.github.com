@@ -11,10 +11,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.1/css/dataTables.responsive.css">
   <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
   <script src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/1.0.1/js/dataTables.responsive.js"></script>
   <script src="https://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 
@@ -56,15 +58,23 @@
       
     <!-- Main Content -->
     <h1>Postilaatikot</h1>
-      <table class="table" id="mailboxes_table">
+      <table class="table display" id="mailboxes_table" cellspacing="0" width="100%">
         <thead>
           <tr>
             <th>Sähköpostiosoite</th>
             <th>Verkkotunnus</th>
             <th>Aktiivinen</th>
-            <th></th>
+            <th>Tilankäyttö (Gb)</th>
           </tr>
         </thead>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </tfoot>
         <tbody>
           <tr>
             <td><a href="#">markku.virtanen@wmhost.com</a></td>
@@ -72,23 +82,15 @@
             <td>
               <button type="button" class="btn btn-sm btn-success">Kyllä</button>
             </td>
+            <td>0.5</td>
+          </tr>
+          <tr>
+            <td><a href="#">maija.meikalainen@wmhost.com</a></td>
+            <td>wmhost.com</td>
             <td>
-              <div class="btn-group">
-
-                <a rel="tooltip" class="btn" data-placement="top" title="Muokkaa">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </a>
-                <a rel="tooltip" class="btn" href="#" data-placement="top" title="Vaihda salasana">
-                    <span class="glyphicon glyphicon-lock"></span>
-                </a>
-                <a rel="tooltip" class="btn" href="#" title="Listaa Aliakset">
-                    <span class="glyphicon glyphicon-random"></span>
-                </a>
-                <a rel="tooltip" class="btn" href="#" title="Poista">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </a>
-              </div>
+              <button type="button" class="btn btn-sm btn-success">Kyllä</button>
             </td>
+            <td>1.22</td>
           </tr>
           <tr>
             <td><a href="#">teppo.testaaja@devnet.fi</a></td>
@@ -96,23 +98,15 @@
             <td>
               <button type="button" class="btn btn-sm btn-success">Kyllä</button>
             </td>
+            <td>2.52</td>
+          </tr>
+          <tr>
+            <td><a href="#">maija.muusilainen@devnet.fi</a></td>
+            <td>devnet.fi</td>
             <td>
-              <div class="btn-group">
-
-                <a rel="tooltip" class="btn" data-placement="top" title="Muokkaa">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </a>
-                <a rel="tooltip" class="btn" href="#" data-placement="top" title="Vaihda salasana">
-                    <span class="glyphicon glyphicon-lock"></span>
-                </a>
-                <a rel="tooltip" class="btn" href="#" title="Listaa Aliakset">
-                    <span class="glyphicon glyphicon-random"></span>
-                </a>
-                <a rel="tooltip" class="btn" href="#" title="Poista">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </a>
-              </div>
+              <button type="button" class="btn btn-sm btn-success">Kyllä</button>
             </td>
+            <td>1.22</td>
           </tr>
         </tbody>
       </table>
@@ -121,19 +115,38 @@
   <script>
   $(function() {
     $('[rel=tooltip]').tooltip({container: 'body'});
-    $('#mailboxes_table').dataTable(
-    {
+    var table = $('#mailboxes_table').DataTable({
       "language": {
           "url": "https://cdn.datatables.net/plug-ins/a5734b29083/i18n/Finnish.json"
       },
-      "columnDefs": [
-        {
-           "bSortable": false,
-           "targets": [ -1 ]
-        }
-      ]
-    }
-    );
+      responsive: true,
+      "paging":   false,
+      "info":     false
+    });
+
+    $("#mailboxes_table tfoot th").each(function(i) {
+      console.log(i);
+      if (i == 1) {
+        var select = $('<select><option value="">Kaikki</option></select>')
+          .appendTo($(this).empty() )
+          .on('change', function() {
+        
+        var val = $(this).val();
+
+          
+            table.column(i)
+              .search( val ? '^'+$(this).val()+'$' : val, true, false )
+              .draw();
+        });
+
+        table.column( i ).data().unique().sort().each( function ( d, j ) {
+            select.append( '<option value="'+d+'">'+d+'</option>' )
+        });
+      }
+
+    });
+
+
   });
   </script>
 </body>
